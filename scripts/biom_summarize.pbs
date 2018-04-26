@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 36
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+# summarizing
+biom summarize-table \
+-i ~/Picked_OTUs/otu_table.biom \
+-o ~/otu_summary.txt
+
+#deactivating environment
+source deactivate

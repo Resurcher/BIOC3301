@@ -1,0 +1,25 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 36
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+# comparing alpha diversity
+compare_alpha_diversity.py \
+-i ~/CDA_out/arare_max627/alpha_div_collated/PD_whole_tree.txt \
+-m ~/maps/map_complete.tsv \
+-c SamplePh \
+-o ~/CA_Out_pH/ 
+
+
+#deactivating environment
+source deactivate

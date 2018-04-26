@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+make_otu_heatmap.py \
+-i ~/Sorted_OTUs/L2_Sorted_pH.biom \
+-o ~/heatmap.pdf \
+-m ~/maps/map_pH_sorted.tsv
+ 
+#deactivating environment
+source deactivate

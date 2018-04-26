@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 36
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+make_distance_boxplots.py \
+-m ~/maps/map_complete.tsv \
+-o ~/DB_Out/ \
+-d ~/CDA_out/bdiv_even627/unweighted_unifrac_dm.txt \
+-f SamplePh
+
+#deactivating environment
+source deactivate

@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+# script copied to ~/Split_OTUs/ before running
+merge_otu_tables.py \
+-i otu_table__SamplePh_5__.biom,otu_table__SamplePh_5.5__.biom,otu_table__SamplePh_5.6__.biom,otu_table__SamplePh_5.7__.biom \
+-o ~/Merged_OTUs/Acidic.biom
+
+#deactivating environment
+source deactivate

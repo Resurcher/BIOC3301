@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 24
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+sort_otu_table.py \
+-i ~/CDA_out/taxa_plots/table_mc627_sorted_L2.biom \
+-o ~/L2_Sorted_pH.biom \
+-m ~/maps/map_pH.tsv \
+-l ~/maps/Sample_List_pH.txt
+
+#deactivating environment
+source deactivate

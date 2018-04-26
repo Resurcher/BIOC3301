@@ -1,0 +1,23 @@
+#!/bin/bash
+#SBATCH -t 1:00:00
+#SBATCH -n 36
+#SBATCH -p short
+
+#Load modules
+module load eb
+module load Miniconda2
+
+# loading virtualenv
+source activate qiime1
+
+# setting temporary directory
+export TMPDIR=~/qiime_tmp
+
+group_significance.py \
+-i ~/Picked_OTUs/otu_table.biom \
+-m ~/maps/map_mycelium.tsv \
+-c Mycelium \
+-o ~/CP_mycelium_out  
+
+#deactivating environment
+source deactivate
